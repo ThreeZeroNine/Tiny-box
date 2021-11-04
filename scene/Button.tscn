@@ -1,0 +1,99 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://assest/font/pixelFont.tres" type="DynamicFont" id=1]
+[ext_resource path="res://assest/button.png" type="Texture" id=2]
+
+[node name="Button" type="Node2D"]
+
+[node name="BuyPeopleBtn" type="TextureButton" parent="."]
+margin_left = 12.8699
+margin_top = 398.444
+margin_right = 93.8703
+margin_bottom = 478.444
+texture_normal = ExtResource( 2 )
+expand = true
+stretch_mode = 4
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="BuyPeopleBtnText" type="Label" parent="BuyPeopleBtn"]
+margin_left = 21.0
+margin_top = 27.0
+margin_right = 59.0
+margin_bottom = 51.0
+custom_fonts/font = ExtResource( 1 )
+text = "购买"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="FeedPeople" type="TextureButton" parent="."]
+margin_left = 98.194
+margin_top = 397.915
+margin_right = 178.194
+margin_bottom = 480.915
+texture_normal = ExtResource( 2 )
+expand = true
+stretch_mode = 4
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="FeedPeopleText" type="Label" parent="FeedPeople"]
+margin_left = 21.5
+margin_top = 26.5
+margin_right = 59.5
+margin_bottom = 50.5
+custom_fonts/font = ExtResource( 1 )
+text = "喂养"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CheckState" type="TextureButton" parent="."]
+margin_left = 183.194
+margin_top = 397.915
+margin_right = 263.194
+margin_bottom = 478.915
+rect_pivot_offset = Vector2( -245.694, -10.415 )
+texture_normal = ExtResource( 2 )
+expand = true
+stretch_mode = 4
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CheckStateText" type="Label" parent="CheckState"]
+margin_left = 20.4158
+margin_top = 26.1964
+margin_right = 58.4158
+margin_bottom = 50.1964
+custom_fonts/font = ExtResource( 1 )
+text = "状态"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Play" type="TextureButton" parent="."]
+margin_left = 263.194
+margin_top = 397.915
+margin_right = 350.194
+margin_bottom = 477.915
+texture_normal = ExtResource( 2 )
+expand = true
+stretch_mode = 5
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PlayText" type="Label" parent="Play"]
+margin_left = 25.4438
+margin_top = 26.0561
+margin_right = 63.4438
+margin_bottom = 50.0561
+custom_fonts/font = ExtResource( 1 )
+text = "娱乐"
+__meta__ = {
+"_edit_use_anchors_": false
+}

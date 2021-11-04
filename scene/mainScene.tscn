@@ -1,0 +1,632 @@
+[gd_scene load_steps=21 format=2]
+
+[ext_resource path="res://assest/font/pixelFont.tres" type="DynamicFont" id=1]
+[ext_resource path="res://assest/background.png" type="Texture" id=2]
+[ext_resource path="res://scripts/mainScene.gd" type="Script" id=3]
+[ext_resource path="res://assest/background_clear.png" type="Texture" id=4]
+[ext_resource path="res://assest/room.png" type="Texture" id=5]
+[ext_resource path="res://assest/main.png" type="Texture" id=6]
+[ext_resource path="res://scene/tiny.tscn" type="PackedScene" id=7]
+[ext_resource path="res://assest/button.png" type="Texture" id=8]
+[ext_resource path="res://scripts/BuyPeople.gd" type="Script" id=9]
+[ext_resource path="res://scripts/RefreshInformaton.gd" type="Script" id=10]
+[ext_resource path="res://scripts/FeedPeople.gd" type="Script" id=11]
+[ext_resource path="res://scripts/CheckStateBtnNode.gd" type="Script" id=12]
+[ext_resource path="res://scripts/PlayBtnNode.gd" type="Script" id=13]
+[ext_resource path="res://scripts/ShrunkPeopleBtnNode.gd" type="Script" id=14]
+[ext_resource path="res://assest/TinyShopImg/water.png" type="Texture" id=15]
+[ext_resource path="res://assest/font/itemInformation.tres" type="DynamicFont" id=16]
+[ext_resource path="res://assest/font/FeedMenuExitText.tres" type="DynamicFont" id=17]
+[ext_resource path="res://scripts/BuyItemForPeople.gd" type="Script" id=18]
+[ext_resource path="res://assest/TinyShopImg/bread.png" type="Texture" id=19]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 159.709, 6.78491 )
+
+[node name="mainScene" type="Node2D"]
+script = ExtResource( 3 )
+
+[node name="background" type="Sprite" parent="."]
+position = Vector2( 180.194, 319.915 )
+z_index = -1
+texture = ExtResource( 2 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Information" type="RichTextLabel" parent="background"]
+anchor_left = -0.00887222
+anchor_top = 0.00482035
+anchor_right = -0.00887222
+anchor_bottom = 0.00482035
+margin_left = -161.0
+margin_top = -307.0
+margin_right = 162.0
+margin_bottom = -277.0
+custom_fonts/normal_font = ExtResource( 17 )
+custom_colors/default_color = Color( 0, 0, 0, 1 )
+text = "By Growtopia"
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
+[node name="InformationTween" type="Tween" parent="background/Information"]
+
+[node name="background_clear" type="Sprite" parent="."]
+visible = false
+position = Vector2( 179.991, 320.018 )
+texture = ExtResource( 4 )
+
+[node name="Clear_Information" type="RichTextLabel" parent="background_clear"]
+margin_left = -161.122
+margin_top = -167.796
+margin_right = 161.878
+margin_bottom = 102.204
+custom_fonts/normal_font = ExtResource( 1 )
+custom_colors/default_color = Color( 0, 0, 0, 1 )
+text = "By Growtopia"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="InformationTween" type="Tween" parent="background_clear/Clear_Information"]
+
+[node name="room" type="Area2D" parent="."]
+position = Vector2( 180.242, 170.853 )
+scale = Vector2( 1.34365, 1 )
+
+[node name="room" type="Sprite" parent="room"]
+position = Vector2( -0.207088, 167.394 )
+scale = Vector2( 0.998741, 2.30152 )
+z_index = -1
+texture = ExtResource( 5 )
+
+[node name="main" type="Sprite" parent="room"]
+position = Vector2( -68.6503, 269.147 )
+scale = Vector2( 0.744241, 1 )
+z_index = 2
+texture = ExtResource( 6 )
+
+[node name="tiny" parent="room" instance=ExtResource( 7 )]
+visible = false
+position = Vector2( 7.53638, 95.3029 )
+z_index = -1
+
+[node name="StaticBody2D" type="StaticBody2D" parent="room"]
+position = Vector2( 0, 137 )
+
+[node name="WallTop" type="CollisionShape2D" parent="room/StaticBody2D"]
+position = Vector2( 2.79685, 164.147 )
+shape = SubResource( 1 )
+
+[node name="WallBottom" type="CollisionShape2D" parent="room/StaticBody2D"]
+position = Vector2( 2.79684, 324.147 )
+shape = SubResource( 1 )
+
+[node name="WallLeft" type="CollisionShape2D" parent="room/StaticBody2D"]
+position = Vector2( 127.818, 172.649 )
+rotation = 1.5708
+shape = SubResource( 1 )
+
+[node name="WallRight" type="CollisionShape2D" parent="room/StaticBody2D"]
+position = Vector2( -128.723, 181.029 )
+rotation = 1.5708
+shape = SubResource( 1 )
+
+[node name="ButtonNode" type="Node2D" parent="."]
+position = Vector2( 0, -254 )
+
+[node name="BuyPeopleBtnNode" type="Node2D" parent="ButtonNode"]
+position = Vector2( 180.194, 319.915 )
+script = ExtResource( 9 )
+
+[node name="BuyPeopleBtn" type="TextureButton" parent="ButtonNode/BuyPeopleBtnNode"]
+margin_left = -164.194
+margin_top = 54.085
+margin_right = -83.1936
+margin_bottom = 134.085
+texture_normal = ExtResource( 8 )
+expand = true
+stretch_mode = 4
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="BuyPeopleBtnText" type="Label" parent="ButtonNode/BuyPeopleBtnNode/BuyPeopleBtn"]
+margin_left = 24.0
+margin_top = 30.0
+margin_right = 62.0
+margin_bottom = 54.0
+custom_fonts/font = ExtResource( 17 )
+text = "购买"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="FeedPeopleBtnNode" type="Node2D" parent="ButtonNode"]
+position = Vector2( 3, 0 )
+script = ExtResource( 11 )
+
+[node name="FeedPeople" type="TextureButton" parent="ButtonNode/FeedPeopleBtnNode"]
+margin_left = 96.0
+margin_top = 374.0
+margin_right = 176.0
+margin_bottom = 457.0
+texture_normal = ExtResource( 8 )
+expand = true
+stretch_mode = 4
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="FeedPeopleText" type="Label" parent="ButtonNode/FeedPeopleBtnNode/FeedPeople"]
+margin_left = 22.0
+margin_top = 30.0
+margin_right = 55.0
+margin_bottom = 50.0
+custom_fonts/font = ExtResource( 17 )
+text = "喂养"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CheckStateBtnNode" type="Node2D" parent="ButtonNode"]
+position = Vector2( 3, 0 )
+script = ExtResource( 12 )
+
+[node name="CheckState" type="TextureButton" parent="ButtonNode/CheckStateBtnNode"]
+margin_left = 181.0
+margin_top = 374.0
+margin_right = 261.0
+margin_bottom = 455.0
+rect_pivot_offset = Vector2( -245.694, -10.415 )
+texture_normal = ExtResource( 8 )
+expand = true
+stretch_mode = 4
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CheckStateText" type="Label" parent="ButtonNode/CheckStateBtnNode/CheckState"]
+margin_left = 25.0
+margin_top = 30.0
+margin_right = 63.0
+margin_bottom = 54.0
+custom_fonts/font = ExtResource( 17 )
+text = "状态"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PlayBtnNode" type="Node2D" parent="ButtonNode"]
+position = Vector2( 3, 0 )
+script = ExtResource( 13 )
+
+[node name="Play" type="TextureButton" parent="ButtonNode/PlayBtnNode"]
+margin_left = 261.0
+margin_top = 374.0
+margin_right = 348.0
+margin_bottom = 454.0
+texture_normal = ExtResource( 8 )
+expand = true
+stretch_mode = 5
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PlayText" type="Label" parent="ButtonNode/PlayBtnNode/Play"]
+margin_left = 32.0
+margin_top = 30.0
+margin_right = 70.0
+margin_bottom = 54.0
+custom_fonts/font = ExtResource( 17 )
+text = "娱乐"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RefreshInformation" type="Node2D" parent="ButtonNode"]
+position = Vector2( -8, -10 )
+script = ExtResource( 10 )
+
+[node name="PeopleNum" type="Label" parent="ButtonNode/RefreshInformation"]
+margin_left = 24.0
+margin_top = 310.0
+margin_right = 182.0
+margin_bottom = 335.0
+custom_fonts/font = ExtResource( 17 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "人口数:0"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PeopleSize" type="Label" parent="ButtonNode/RefreshInformation"]
+margin_left = 24.0
+margin_top = 342.0
+margin_right = 212.0
+margin_bottom = 370.0
+custom_fonts/font = ExtResource( 17 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "人口大小(倍数):10"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Money" type="Label" parent="ButtonNode/RefreshInformation"]
+margin_left = 24.0
+margin_top = 326.0
+margin_right = 181.0
+margin_bottom = 350.0
+rect_pivot_offset = Vector2( -545.417, -127.01 )
+custom_fonts/font = ExtResource( 17 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "金钱:0"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Mood" type="Label" parent="ButtonNode/RefreshInformation"]
+margin_left = 24.0
+margin_top = 358.0
+margin_right = 151.0
+margin_bottom = 383.0
+custom_fonts/font = ExtResource( 17 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "好感度:0"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PeopleHunger" type="Label" parent="ButtonNode/RefreshInformation"]
+margin_left = 184.0
+margin_top = 312.0
+margin_right = 342.0
+margin_bottom = 337.0
+custom_fonts/font = ExtResource( 17 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "饱食度:0"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ShrunkPeopleBtnNode" type="Node2D" parent="ButtonNode"]
+position = Vector2( 180.194, 319.915 )
+script = ExtResource( 14 )
+
+[node name="ShrunkPeopleBtn" type="TextureButton" parent="ButtonNode/ShrunkPeopleBtnNode"]
+margin_left = -164.194
+margin_top = 142.085
+margin_right = -83.1936
+margin_bottom = 222.085
+texture_normal = ExtResource( 8 )
+expand = true
+stretch_mode = 4
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ShrunkPeopleBtnText" type="Label" parent="ButtonNode/ShrunkPeopleBtnNode/ShrunkPeopleBtn"]
+margin_left = 24.0
+margin_top = 32.0
+margin_right = 62.0
+margin_bottom = 56.0
+custom_fonts/font = ExtResource( 17 )
+text = "缩小"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="FeedPeoplePannel" type="Node2D" parent="."]
+visible = false
+z_index = 2
+script = ExtResource( 18 )
+
+[node name="Panel" type="Panel" parent="FeedPeoplePannel"]
+margin_left = 32.0
+margin_top = 56.0
+margin_right = 324.0
+margin_bottom = 596.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="background_clear" type="Sprite" parent="FeedPeoplePannel/Panel"]
+position = Vector2( 147.1, 271.11 )
+scale = Vector2( 0.818792, 0.852463 )
+texture = ExtResource( 4 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="FeedPeoplePanel_01" type="Node2D" parent="FeedPeoplePannel/Panel"]
+
+[node name="food_01" type="Sprite" parent="FeedPeoplePannel/Panel/FeedPeoplePanel_01"]
+position = Vector2( 48, 112 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 19 )
+
+[node name="information" type="RichTextLabel" parent="FeedPeoplePannel/Panel/FeedPeoplePanel_01/food_01"]
+margin_left = 18.0
+margin_top = -16.0
+margin_right = 80.0
+margin_bottom = 4.0
+custom_fonts/normal_font = ExtResource( 16 )
+text = "最普通的面包
+价格：1"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Food_01_Left" type="RichTextLabel" parent="FeedPeoplePannel/Panel/FeedPeoplePanel_01/food_01"]
+margin_left = 18.0
+margin_top = 4.0
+margin_right = 73.0
+margin_bottom = 14.0
+custom_fonts/normal_font = ExtResource( 16 )
+text = "库存:0"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="BuyFood_01" type="TextureButton" parent="FeedPeoplePannel/Panel/FeedPeoplePanel_01/food_01"]
+margin_left = 94.1225
+margin_top = -12.4745
+margin_right = 118.122
+margin_bottom = 11.5255
+texture_normal = ExtResource( 8 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="FeedPeoplePannel/Panel/FeedPeoplePanel_01/food_01/BuyFood_01"]
+margin_left = 3.6488
+margin_top = 7.06848
+margin_right = 43.6488
+margin_bottom = 24.0685
+custom_fonts/font = ExtResource( 16 )
+text = "购买"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="water_01" type="Sprite" parent="FeedPeoplePannel/Panel/FeedPeoplePanel_01"]
+position = Vector2( 48, 40 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 15 )
+
+[node name="information" type="RichTextLabel" parent="FeedPeoplePannel/Panel/FeedPeoplePanel_01/water_01"]
+margin_left = 17.5762
+margin_top = -15.7705
+margin_right = 59.5762
+margin_bottom = 4.22954
+custom_fonts/normal_font = ExtResource( 16 )
+text = "最普通的水
+价格：1"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Water_01_Left" type="RichTextLabel" parent="FeedPeoplePannel/Panel/FeedPeoplePanel_01/water_01"]
+margin_left = 18.0
+margin_top = 4.0
+margin_right = 73.0
+margin_bottom = 14.0
+custom_fonts/normal_font = ExtResource( 16 )
+text = "库存:0"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="BuyWater_01" type="TextureButton" parent="FeedPeoplePannel/Panel/FeedPeoplePanel_01/water_01"]
+margin_left = 94.1225
+margin_top = -12.4745
+margin_right = 118.122
+margin_bottom = 11.5255
+texture_normal = ExtResource( 8 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="FeedPeoplePannel/Panel/FeedPeoplePanel_01/water_01/BuyWater_01"]
+margin_left = 3.6488
+margin_top = 7.06848
+margin_right = 43.6488
+margin_bottom = 24.0685
+custom_fonts/font = ExtResource( 16 )
+text = "购买"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="exitbutton" type="TextureButton" parent="FeedPeoplePannel"]
+margin_left = 42.9965
+margin_top = 514.762
+margin_right = 115.996
+margin_bottom = 581.762
+texture_normal = ExtResource( 8 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="FeedPeoplePannel/exitbutton"]
+margin_left = 18.8988
+margin_top = 24.5685
+margin_right = 58.8988
+margin_bottom = 41.5685
+custom_fonts/font = ExtResource( 17 )
+text = "关闭"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="StatePanel" type="Node2D" parent="."]
+visible = false
+z_index = 2
+
+[node name="Panel" type="Panel" parent="StatePanel"]
+margin_left = 32.0
+margin_top = 56.0
+margin_right = 324.0
+margin_bottom = 596.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="background_clear" type="Sprite" parent="StatePanel/Panel"]
+position = Vector2( 147.1, 271.11 )
+scale = Vector2( 0.818792, 0.852463 )
+texture = ExtResource( 4 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="StatePanel_01" type="Node2D" parent="StatePanel/Panel"]
+
+[node name="food_01" type="Sprite" parent="StatePanel/Panel/StatePanel_01"]
+position = Vector2( 48, 184 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 19 )
+
+[node name="information" type="RichTextLabel" parent="StatePanel/Panel/StatePanel_01/food_01"]
+margin_left = 18.0
+margin_top = -16.0
+margin_right = 80.0
+margin_bottom = 4.0
+custom_fonts/normal_font = ExtResource( 16 )
+text = "最普通的面包
+10秒消耗1份"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Food_01_Left" type="RichTextLabel" parent="StatePanel/Panel/StatePanel_01/food_01"]
+margin_left = 18.0
+margin_top = 4.0
+margin_right = 73.0
+margin_bottom = 14.0
+custom_fonts/normal_font = ExtResource( 16 )
+text = "库存:0"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="BuyFood_01" type="TextureButton" parent="StatePanel/Panel/StatePanel_01/food_01"]
+visible = false
+margin_left = 94.1225
+margin_top = -12.4745
+margin_right = 118.122
+margin_bottom = 11.5255
+texture_normal = ExtResource( 8 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="StatePanel/Panel/StatePanel_01/food_01/BuyFood_01"]
+margin_left = 3.6488
+margin_top = 7.06848
+margin_right = 43.6488
+margin_bottom = 24.0685
+custom_fonts/font = ExtResource( 16 )
+text = "购买"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="water_01" type="Sprite" parent="StatePanel/Panel/StatePanel_01"]
+position = Vector2( 48, 112 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 15 )
+
+[node name="information" type="RichTextLabel" parent="StatePanel/Panel/StatePanel_01/water_01"]
+margin_left = 18.0
+margin_top = -16.0
+margin_right = 68.0
+margin_bottom = 4.0
+custom_fonts/normal_font = ExtResource( 16 )
+text = "最普通的水
+10秒消耗1份"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Water_01_Left" type="RichTextLabel" parent="StatePanel/Panel/StatePanel_01/water_01"]
+margin_left = 18.0
+margin_top = 4.0
+margin_right = 73.0
+margin_bottom = 14.0
+custom_fonts/normal_font = ExtResource( 16 )
+text = "库存:0"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="BuyWater_01" type="TextureButton" parent="StatePanel/Panel/StatePanel_01/water_01"]
+visible = false
+margin_left = 94.1225
+margin_top = -12.4745
+margin_right = 118.122
+margin_bottom = 11.5255
+texture_normal = ExtResource( 8 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="StatePanel/Panel/StatePanel_01/water_01/BuyWater_01"]
+margin_left = 3.6488
+margin_top = 7.06848
+margin_right = 43.6488
+margin_bottom = 24.0685
+custom_fonts/font = ExtResource( 16 )
+text = "购买"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="StateText" type="RichTextLabel" parent="StatePanel"]
+margin_left = 48.0
+margin_top = 72.0
+margin_right = 312.0
+margin_bottom = 128.0
+custom_fonts/normal_font = ExtResource( 17 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="exitbutton" type="TextureButton" parent="StatePanel"]
+margin_left = 42.9965
+margin_top = 514.762
+margin_right = 115.996
+margin_bottom = 581.762
+texture_normal = ExtResource( 8 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="StatePanel/exitbutton"]
+margin_left = 18.8988
+margin_top = 24.5685
+margin_right = 58.8988
+margin_bottom = 41.5685
+custom_fonts/font = ExtResource( 17 )
+text = "关闭"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[connection signal="ready" from="." to="." method="_on_mainScene_ready"]
+[connection signal="pressed" from="ButtonNode/BuyPeopleBtnNode/BuyPeopleBtn" to="ButtonNode/BuyPeopleBtnNode" method="_on_BuyPeopleBtn_pressed"]
+[connection signal="pressed" from="ButtonNode/FeedPeopleBtnNode/FeedPeople" to="ButtonNode/FeedPeopleBtnNode" method="_on_FeedPeople_pressed"]
+[connection signal="pressed" from="ButtonNode/CheckStateBtnNode/CheckState" to="ButtonNode/CheckStateBtnNode" method="_on_CheckState_pressed"]
+[connection signal="pressed" from="ButtonNode/PlayBtnNode/Play" to="ButtonNode/PlayBtnNode" method="_on_Play_pressed"]
+[connection signal="pressed" from="ButtonNode/ShrunkPeopleBtnNode/ShrunkPeopleBtn" to="ButtonNode/ShrunkPeopleBtnNode" method="_on_ShrunkPeopleBtn_pressed"]
+[connection signal="pressed" from="FeedPeoplePannel/Panel/FeedPeoplePanel_01/food_01/BuyFood_01" to="FeedPeoplePannel" method="_on_BuyFood_01_pressed"]
+[connection signal="pressed" from="FeedPeoplePannel/Panel/FeedPeoplePanel_01/water_01/BuyWater_01" to="FeedPeoplePannel" method="_on_BuyWater_01_pressed"]
+[connection signal="pressed" from="FeedPeoplePannel/exitbutton" to="ButtonNode/FeedPeopleBtnNode" method="_on_exitbutton_pressed"]
+[connection signal="pressed" from="StatePanel/exitbutton" to="ButtonNode/CheckStateBtnNode" method="_on_exitbutton_pressed"]
